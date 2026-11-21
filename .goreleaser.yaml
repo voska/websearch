@@ -12,3 +12,21 @@ archives:
     files: [LICENSE, README.md, skills/websearch/SKILL.md]
 checksum:
   name_template: checksums.txt
+brews:
+  - name: websearch
+    directory: Formula
+    homepage: "https://github.com/voska/websearch"
+    description: "Search the web through the Voska LiteLLM proxy"
+    license: MIT
+    repository:
+      owner: voska
+      name: homebrew-tap
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+    commit_author:
+      name: voska-bot
+      email: bot@voska.dev
+    install: |
+      bin.install "websearch"
+      pkgshare.install "skills"
+    test: |
+      system "#{bin}/websearch", "--version"
