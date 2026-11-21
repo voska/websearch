@@ -21,7 +21,13 @@ brews:
     repository:
       owner: voska
       name: homebrew-tap
-      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+      git:
+        url: git@github.com:voska/homebrew-tap.git
+        private_key: "{{ .Env.HOMEBREW_TAP_DEPLOY_KEY }}"
+        ssh_command: >-
+          ssh -F /dev/null -i "{{ .KeyPath }}" -o IdentitiesOnly=yes
+          -o BatchMode=yes -o StrictHostKeyChecking=yes
+          -o GlobalKnownHostsFile=/dev/null -o UserKnownHostsFile=~/.ssh/websearch_known_hosts
     commit_author:
       name: voska-bot
       email: bot@voska.dev
